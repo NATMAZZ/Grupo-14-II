@@ -7,6 +7,16 @@ from ..utilities import translator
 from django.contrib.auth import get_user
 
 def getAllImages():
+    coleccion=transport.getAllImages()
+    cards=[]
+
+    for personaje in coleccion:
+        carta=translator.fromRequestIntoCard(personaje)
+        if carta.phrases:
+            frase_random= random.choice(carta.phrases)
+            carta.phrases=[frase_random]
+        cards.append(carta)
+    return cards
     """
     Obtiene todas las imágenes de personajes desde la API y las convierte en objetos Card.
     
