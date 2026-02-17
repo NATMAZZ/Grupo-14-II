@@ -5,7 +5,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-8">
-                        <h2><strong> Tus favoritos: </strong></h2>
+                        <h2><strong> Tus personajes favoritos: </strong></h2>
                     </div>
                 </div>
             </div>
@@ -28,14 +28,14 @@
                         <th>Género <i class="fa fa-sort"></i></th>
                         <th>Estado</th>
                         <th>Ocupación <i class="fa fa-sort"></i></th>
-                        <th>Acciones </th>
+                        <th>Eliminar de favoritos </th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for favourite in favourite_list %}
                     <tr>
                         <td>-</td>
-                        <td><img src="{{ favourite.image }}" alt="" style="max-width: 200px; max-height: 200px;"></td>
+                        <td><img src="{{ favourite.image }}" alt="" style="max-width: 50px; max-height: 50px;"></td>
                         <td>{{ favourite.name }}</td>
                         <td>{{ favourite.gender }}</td>
                         <td>{{ favourite.status }}</td>

@@ -5,7 +5,7 @@ from .layers.services import services
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib import messages 
-from django.db import IntegrityError    
+
 
 
 def index_page(request):
