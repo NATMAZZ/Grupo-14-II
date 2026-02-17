@@ -1,7 +1,7 @@
 # archivo de configuración del sistema.
 
 # versión del TP.
-VERSION = 'Trabajo práctico - COMISIÓN VERANO 2026'
+VERSION = 'TP - COM. SUMMER 2026'
 
 # URL - API
 SIMPSONS_API_BASE_URL = 'https://thesimpsonsapi.com/api'

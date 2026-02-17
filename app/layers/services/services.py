@@ -5,6 +5,7 @@ from ..transport import transport
 from ..persistence import repositories
 from ..utilities import translator
 from django.contrib.auth import get_user
+from django.db import IntegrityError
 
 def getAllImages():
     coleccion=transport.getAllImages()
@@ -41,29 +42,46 @@ def filterByStatus(status_name):
     """
     pass
 
-# añadir favoritos (usado desde el template 'home.html')
+
 def saveFavourite(request):
+    try:
+        fav = translator.fromTemplateIntoCard(request)  #Se transforma el request en una Card usando el translator.
+        fav.user = get_user(request) #Se asigna el usuario actual a la Card.
+        return repositories.saveFavourite(fav) #Se guarda la Card en el repositorio y se retorna el resultado.
+    except IntegrityError:
+        return None #si el personaje ya es un favorito, devuelve None y en la vista se vera el mensaje que definimos para este caso.
+
     """
     Guarda un favorito en la base de datos.
-    
     Se deben convertir los datos del request en una Card usando el translator,
     asignarle el usuario actual, y guardarla en el repositorio.
     """
-    pass
-
+    
 def getAllFavourites(request):
+    if not request.user.is_authenticated:
+        return []
+    else:
+        user = get_user(request) # Obtener el usuario actual desde el request
+
+        favourite_list= repositories.getAllFavourites(user)# Busca desde el repositorio los favoritos del usuario (User).
+        mapped_favourites = [] # Se crea una lista vacía para almacenar los favoritos transformados en Cards.
+
+        for fav in favourite_list: # Se itera sobre cada favorito obtenido del repositorio.
+            card = translator.fromRepositoryIntoCard(fav) # Se transforma cada favorito en una Card usando el translator. 
+            mapped_favourites.append(card) # Se agrega la Card a la lista de favoritos transformados.
+
+        return mapped_favourites # Se retorna la lista de Cards que representan los favoritos del usuario.
     """
     Obtiene todos los favoritos del usuario autenticado.
-    
     Si el usuario está autenticado, se deben obtener sus favoritos desde el repositorio,
     transformarlos en Cards usando translator y retornar la lista. Si no está autenticado, se retorna una lista vacía.
     """
-    pass
-
+    
 def deleteFavourite(request):
+    favId = request.POST.get('id') # Se obtiene el ID del favorito a eliminar desde el POST del request.
+    return repositories.deleteFavourite(favId) # Se llama al repositorio para eliminar el favorito con el ID obtenido y se retorna el resultado.
+    
     """
     Elimina un favorito de la base de datos.
-    
     Se debe obtener el ID del favorito desde el POST y eliminarlo desde el repositorio.
     """
-    pass
