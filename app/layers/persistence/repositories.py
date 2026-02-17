@@ -15,10 +15,13 @@ def saveFavourite(fav):
     return fav
 
 def getAllFavourites(user):
+    return list(Favourite.objects.filter(user=user).values(
+        'id', 'image', 'name', 'gender', 'status', 'occupation'
+    ))
+
     """
     Obtiene todos los favoritos de un usuario desde la base de datos.
     """
-    pass
 
 def deleteFavourite(favId):
     favourite = Favourite.objects.get(id=favId)

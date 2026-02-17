@@ -25,6 +25,11 @@ def fromRequestIntoCard(object):
 
 # Usado cuando la información viene del template, para transformarla en una Card antes de guardarla en la base de datos.
 def fromTemplateIntoCard(templ): 
+    # Obtenemos la edad del POST
+    age_raw = templ.POST.get("age")
+    # Validamos: si es un número, lo convertimos; si no, ponemos 0
+    age_final = int(age_raw) if (age_raw and age_raw.isdigit()) else 0
+   
     card = Card(
         name=templ.POST.get("name"),
         gender=templ.POST.get("gender"),
@@ -32,7 +37,7 @@ def fromTemplateIntoCard(templ):
         phrases=templ.POST.get("phrases"),
         occupation=templ.POST.get("occupation"),
         image=templ.POST.get("image"),
-        age=templ.POST.get("age")
+        age=age_final
     )
     return card
 
