@@ -5,6 +5,9 @@ from .layers.services import services
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib import messages 
+from django.core.mail import send_mail 
+from django.contrib.auth.models import User
+from django.conf import settings
 
 
 
@@ -99,3 +102,47 @@ def deleteFavourite(request):
 def exit(request):
     logout(request)
     return redirect('home')
+
+"""
+    Hacer un nuevo usuario:
+    Con esta funcion voy a pedirle al usuario nuevo sus datos para cadastro: nombre, apellido, email, usuario y contraseña.
+    Luego, con esos datos, se crea un nuevo usuario en la base de datos y se le envía un email de bienvenida al correo que proporcionó.
+    Con esto y from django.core.mail import send_mail que puse al iniciio puedo enviarle las credenciales al correo del usuario nuevo.
+"""
+
+def mostrar_formulario(request):
+    return render(request, 'register.html')
+
+def register(request):
+    if request.method == 'POST':
+        nombre = request.POST.get('first_name')
+        apellido = request.POST.get('last_name')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Aquí se debería crear el nuevo usuario en la base de datos usando los datos obtenidos, antes de crear el usuario, se verifica si el nombre de usuario ya existe para evitar duplicados:
+       
+        if User.objects.filter(username=username).exists():
+            messages.warning(request, 'El nombre de usuario ya existe. Por favor, elige otro.')
+            return redirect('register') #Si el nombre de usuario ya existe, se muestra un mensaje de advertencia y se redirige al formulario de registro para que el usuario intente con otro nombre.
+        
+        #Se crea el nuevo usuario en la base de datos con los datos obtenidos del formulario de registro:
+        
+        user = User.objects.create_user(username=username, password=password, email=email, first_name=nombre, last_name=apellido)
+        user.save()
+       
+        #Se envía un correo de bienvenida al nuevo usuario con sus credenciales:
+       
+        subject = 'Bienvenido a la comunidad de fans de Los Simpsons'
+        message = f'Hola {nombre}, gracias por registrarte en nuestra comunidad de fans de Los Simpsons.\n\nTu usuario es: {username}\n\nTu pass es: {password}\n\nBienvenido Vecinirijillo!'
+        
+        try:
+            send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
+            messages.success(request, 'Usuario creado. Email enviado.')
+        except Exception:
+            messages.success(request, 'Usuario creado correctamente (no se pudo enviar el email).')
+        
+        return redirect('home') # Se redirige al usuario a la página principal después de registrarse.
+    
+    return render(request,'register.html') # Se renderiza el template 'register.html' pasando el formulario en el contexto.
