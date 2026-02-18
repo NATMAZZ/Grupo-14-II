@@ -4,6 +4,47 @@
         <strong>{{VERSION}}</strong>
     </div>
 </footer>
+<script>
+(function() {
+
+  const loader = document.getElementById("page-loader");
+
+  function showLoader(){
+    if(!loader) return;
+    loader.classList.remove("hidden");
+  }
+
+  function hideLoader(){
+    if(!loader) return;
+    loader.classList.add("hidden");
+  }
+
+  /* MOSTRAR AL HACER CLICK EN CUALQUIER LINK */
+
+  document.addEventListener("click", function(e){
+    const link = e.target.closest("a");
+
+    if(!link) return;
+
+    const href = link.getAttribute("href");
+
+    // ignorar anclas internas
+    if(!href || href.startsWith("#")) return;
+
+    // ignorar nuevas pestañas
+    if(link.target === "_blank") return;
+
+    showLoader();
+  });
+
+  /* OCULTAR CUANDO LA PAGINA TERMINA DE CARGAR */
+
+  window.addEventListener("load", function(){
+    hideLoader();
+  });
+
+})();
+</script>
 </body>
 
 </html>

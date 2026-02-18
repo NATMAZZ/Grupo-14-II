@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="es">
 
 <head>
@@ -8,9 +9,61 @@
     {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %} {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+/* ===== PANTALLA DE CARGA ===== */
+.loader{
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.45);
+  z-index: 9999;
+  transition: opacity .35s ease;
+  opacity: 1;
+}
+
+.hidden{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-inner{
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.95);
+}
+
+/* LA DONA GIRANDO 🍩 */
+.donut-spin{
+  width: 95px;
+  height: 95px;
+  animation: donut-rotate 0.9s linear infinite;
+}
+
+@keyframes donut-rotate{
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.loader-text{
+  margin: 0;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+</style>
 </head>
 
 <body>
+        <!-- ===== LOADER ===== -->
+    <div id="page-loader" class="loader">
+    <div class="loader-inner">
+        <img src="{% static 'imagenes/dona.png' %}?v=2" alt="Cargando..." class="donut-spin">
+        <p class="loader-text">Cargando Springfield...</p>
+    </div>
+    </div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Proyecto TP</a>
@@ -20,25 +73,25 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}" class="show-loader">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><strong>Galería</strong></a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}" class="show-loader">Galería</a>
                     </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'favoritos' %}">Favoritos</a>
+                        <a class="nav-link" href="{% url 'favoritos' %}" class="show-loader">Favoritos</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
                         {% if request.user.is_authenticated %}
-                        <a class="nav-link" href="{% url 'exit' %}">Salir</a> {% else %}
-                        <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a> {% endif %}
+                        <a class="nav-link" href="{% url 'exit' %}" class="show-loader">Salir</a> {% else %}
+                        <a class="nav-link" href="{% url 'login' %}" class="show-loader">Iniciar sesión</a> {% endif %}
                     </li>
 
                     {% if not request.user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
+                        <a class="nav-link" href="{% url 'register' %}" class="show-loader">Registrarse</a>
                     </li>
                     {% endif %}
                 </ul>
