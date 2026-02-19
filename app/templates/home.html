@@ -1,4 +1,4 @@
-{% extends 'header.html' %} {% block content %}
+{% extends 'header.html' %} {% block content %} {% load static %}
 <main>
     {% if messages %}
         {% for message in messages %}
@@ -8,7 +8,7 @@
         {% endfor %}
     {% endif %}
 
-    <h1 class="text-center">Buscador de personajes de Los Simpsons</h1>
+    <h1 class="text-center">Encontrá a tu vecino de Springfield</h1>
 
     <div class="d-flex justify-content-center" style="margin-bottom: 1%">
         <!-- Buscador del sitio -->
@@ -35,7 +35,7 @@
 
     <div class="row row-cols-1 row-cols-md-3 g-4 align-items-stretch"">
         {% if images|length == 0 %}
-        <h2 class="text-center">La búsqueda no arrojó resultados...</h2>
+        <h2 class="text-center">"D'oh! Eso no lo encontre..."</h2>
         {% else %} {% for img in images %}
         <div class="col d-flex">
             <!-- TODO: la card debe cambiar su border color dependiendo del estado del personaje:
