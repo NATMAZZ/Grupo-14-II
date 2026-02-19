@@ -60,7 +60,13 @@ def filter_by_status(request):
     Se debe obtener el parámetro 'status' desde el POST, filtrar las imágenes según ese estado
     y renderizar 'home.html' con los resultados. Si no hay estado, redirigir a 'home'.
     """
-    pass
+    status = request.POST.get('status') #Se obtiene el valor del botón.
+    if status is None:
+        return redirect('home') #Si no se recibe un estado, se redirige al home.
+    images = services.filterByStatus(status) #Filtra las cards que coincidan con la busqueda.
+    favourite_list = []
+
+    return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list}) #Se renderiza el template 'home.html' pasando el listado de imágenes.
 
 # Estas funciones se usan cuando el usuario está logueado en la aplicación.
 @login_required
