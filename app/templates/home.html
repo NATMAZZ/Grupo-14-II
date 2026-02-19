@@ -46,20 +46,17 @@
                  Documentación: https://docs.djangoproject.com/en/4.2/ref/templates/builtins/#if
                  Bootstrap cards: https://getbootstrap.com/docs/4.0/components/card/
             -->
-            <div class="card mb-3 ms-5 border-1 {% if img.status == "Alive"%} border-success {% elif img.status == "Deceased"%} border-secondary {%else%} border-warning {% endif%}">
+            <div class="card mb-3 ms-5 border-2 {% if img.status == "Alive"%} border-success {% elif img.status == "Deceased"%} border-secondary {%else%} border-warning {% endif%}">
                 <div class="row g-0">
                             <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
-                                <img src="{{ img.image }}" class="rounded-circle border border-2 border-dark" alt="{{ img.name }}" style="width: 125px; height: 125px; object-fit: cover;">
+                                <img src="{{ img.image }}" class="rounded-circle border border-0.5 border-dark" alt="{{ img.name }}" style="width: 125px; height: 125px; object-fit: cover;">
                             </div>
 
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h3 class="card-title text-dark fw-bold">{{ img.name }}</h3>
                                     <p class="card-text">
-                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                            <strong><em>"{{ img.phrases }}"</em></strong>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
+                                        <strong><em>"{{ img.phrases }}"</em></strong>
                                     </p>
                                     <p class="card-text"><small class="text-body-secondary">👤 Género: {{ img.gender }}</small></p>
                                     {% if img.age %}

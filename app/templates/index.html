@@ -1,4 +1,9 @@
-{% extends 'header.html' %} {% block content %} {% if request.user.is_authenticated %}
+{% extends 'header.html' %} 
+{% block body_class %}home-page{% endblock %} 
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
 <h2 class="text-center">¡Hola tarolas! {{ user.username }}!</h2>
 {% else %}
 <h2 class="text-center">¡Hola tarolas!</h2>

@@ -1,7 +1,9 @@
-body {
-    color: #566787;
-    background: #f5f5f5;
-    font-family: 'Roboto', sans-serif;
+body{
+  background-image: url("/static/imagenes/simpsons-verano.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .table-responsive {
@@ -194,3 +196,157 @@ table.table td i {
   font-weight: 600;
 }
 
+/* REDISEÑO -----> Pongo un fondo blanco para diferenciar las cards de la imagen de fondo: */
+
+
+.page-wrap{
+  width: min(1500px, 96%);
+  margin: 24px auto;
+  background: rgba(255,255,255,0.90);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 14px 26px rgba(0,0,0,0.15);
+}
+
+/* REDISEÑO -----> Con este codigo hago que el texto de la frase ocupe menos espacio: */
+.alert{
+  font-size: 14px;
+  padding: 10px 12px;
+}
+
+/* Caja blanca “tipo vidrio” para contenidos sobre el fondo */
+.contenido-sobre-fondo{
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+
+/* Fondo animado SOLO en el index */
+.home-page{
+  background-image: url("/static/Imagenes/homers-web-page.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* estado inicial del fondo animado */
+.home-page .page-wrap{
+    opacity: 0;
+    transform: translateY(20px);
+    animation: aparecer 1s ease forwards;
+}
+
+/* transformacion del fondo animado */
+@keyframes aparecer{
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Logo en formulario de registro */
+.logo-simpsons{
+    width: 160px;
+    filter: drop-shadow(0 6px 6px rgba(0,0,0,.35));
+}
+
+/* ===== Fondo pagina registro ===== */
+
+.register-bg{
+    background-image: url("/static/imagenes/do-it-for-her.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* NAVBAR
+ amarillo Simpsons (global) */
+.navbar-simpsons{
+  background: rgba(135,206,235,0.45) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 3px solid rgba(0,0,0,0.15);
+}
+
+/* Color y peso de links */
+.navbar-simpsons .navbar-brand,
+.navbar-simpsons .nav-link{
+  color: #1f2d3d !important;
+  font-weight: 700;
+}
+
+/* Hover más “vivo” */
+.navbar-simpsons .nav-link:hover{
+  color: #0b5ed7 !important;
+}
+
+/* Para que siempre se vea arriba */
+.navbar-simpsons{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+/* CONTENEDOR DE TODA LA PANTALLA */
+.register-page{
+    position: relative;
+    min-height: 100vh;
+}
+
+/* PANEL FLOTANTE */
+#register-panel{
+    position: absolute;
+
+    top: 400px;      /* baja desde la navbar */
+    left: 90px;      /* lo empuja desde la izquierda */
+
+    width: 420px;
+
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+
+/* Quitar la placa blanca grande SOLO en /register/ */
+.no-pagewrap{
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Boton simpsoniano en registro */
+.btn-simpson{
+  background: #FFD90F;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  border-radius: 14px;
+  padding: 10px 16px;
+  box-shadow: 0 4px 0 #c7a800;
+  transition: 0.15s;
+}
+
+.btn-simpson:hover{
+  background: #ffe347;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #c7a800;
+}
+
+.btn-simpson:active{
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #c7a800;
+}
+
+body.page-favoritos .page-wrap{
+  width: min(1700px, 98%);
+  padding: 32px;
+}
+
+body.page-favoritos .page-wrap{
+  background: rgba(255,255,255,0.48);
+}
