@@ -41,10 +41,14 @@ def filterByCharacter(name):
 def filterByStatus(status_name):
     """
     Filtra las cards de personajes según su estado (Alive/Deceased).
-    
     Se deben filtrar los personajes que tengan el estado igual al parámetro 'status_name'. Retorna una lista de Cards filtradas.
     """
-    pass
+    cards = getAllImages() #Obtiene todas las cards.
+    filtradas = []
+    for carta in cards: # Se recorrecada una de las cartas.
+        if carta.status == status_name: #Si el estado buscado coincide con el estado dentro de la card, se agrega a la lista. 
+            filtradas.append(carta) 
+    return filtradas #Se devuelve la lista generada.
 
 
 def saveFavourite(request):
@@ -90,3 +94,4 @@ def deleteFavourite(request):
     Se debe obtener el ID del favorito desde el POST y eliminarlo desde el repositorio.
 
     """
+
