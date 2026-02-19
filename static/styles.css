@@ -299,15 +299,17 @@ table.table td i {
 #register-panel{
     position: absolute;
 
-    top: 400px;      /* baja desde la navbar */
+    margin-top: -10px;
+
+    top: 0px;      /* baja desde la navbar */
     left: 90px;      /* lo empuja desde la izquierda */
 
-    width: 420px;
+    width: 450px;
 
     background: rgba(255,255,255,0.92);
     backdrop-filter: blur(6px);
 
-    border-radius: 18px;
+    border-radius: 10px;
     box-shadow: 0 12px 40px rgba(0,0,0,0.35);
 }
 
@@ -319,7 +321,7 @@ table.table td i {
   margin: 0 !important;
 }
 
-/* Boton simpsoniano en registro */
+/* Boton amarillo en registro */
 .btn-simpson{
   background: #FFD90F;
   border: none;
@@ -349,4 +351,22 @@ body.page-favoritos .page-wrap{
 
 body.page-favoritos .page-wrap{
   background: rgba(255,255,255,0.48);
+}
+
+.empty-favs{
+  margin-top: -80px;          /* sube a Apu */
+  justify-content: flex-start; /* arranca arriba (por si algún padre hace un flex) */
+  padding-top: 0;
+}
+
+.empty-favs{
+  background: rgba(255,255,255,0.80);
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+#register-panel{
+    max-width: 420px;
+    margin: 80px;
+    border-radius: 16px;
 }

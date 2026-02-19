@@ -8,7 +8,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-8">
-                        <h2><strong> Tus personajes favoritos: </strong></h2>
+                        <h2><strong> Tus vecinos favoritos de Springfield están acá: </strong></h2>
                     </div>
                 </div>
             </div>
@@ -26,18 +26,29 @@
             {% load static %}
 
             {% if favourite_list|length == 0 %}
-                <div class="text-center py-5">
-                    <img src="{% static 'imagenes/apu-limpieza.png' %}" 
-                        alt="Apu barriendo"
-                        style="max-width:320px; width:100%; height:auto;">
+              <div class="empty-favs container py-4">
+                <div class="row align-items-center justify-content-center g-4">
 
-                    <h4 class="mt-4">No tenés personajes favoritos todavía</h4>
-                    <p>¡Agregá algunos desde la guía!</p>
+                <!-- Columna imagen -->
+                <div class="col-12 col-md-4 text-center">
+                    <img src="{% static 'imagenes/apu-limpieza.png' %}"
+                        alt="Apu barriendo"
+                        class="img-fluid"
+                        style="max-width:200px;">
+                </div>
+
+                <!-- Columna texto -->
+                <div class="col-12 col-md-6 text-center text-md-start">
+                    <h4 class="mb-2">No tenés ninguno guardado aún</h4>
+                    <p class="text-muted mb-3">¡Agregá algunos desde la guía!</p>
 
                     <a href="{% url 'home' %}" class="btn btn-warning">
-                        Ir a la galeria de personajes
+                    Ir a la guía de personajes
                     </a>
                 </div>
+
+                </div>
+            </div>
 
             {% else %}
             <table class="table table-striped table-hover align-middle w-100">
