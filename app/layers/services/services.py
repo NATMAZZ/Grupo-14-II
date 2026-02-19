@@ -29,10 +29,14 @@ def getAllImages():
 def filterByCharacter(name):
     """
     Filtra las cards de personajes según el nombre proporcionado.
-    
     Se debe filtrar los personajes cuyo nombre contenga el parámetro recibido. Retorna una lista de Cards filtradas.
     """
-    pass
+    cards = getAllImages() #Obtiene todas las cards.
+    filtradas = [] 
+    for carta in cards: #Se recorre cada una de las cartas.
+        if name.lower() in carta.name.lower(): #name sale de translator.py 
+            filtradas.append(carta) #Si el nombre de la card coincide con el parametro buscado, la misma se agrega a la lista.
+    return filtradas # Se devuelve la lista generada.
 
 def filterByStatus(status_name):
     """
@@ -84,4 +88,5 @@ def deleteFavourite(request):
     """
     Elimina un favorito de la base de datos.
     Se debe obtener el ID del favorito desde el POST y eliminarlo desde el repositorio.
+
     """

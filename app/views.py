@@ -39,13 +39,19 @@ def home(request):
 
 
 def search(request):
+    query = request.POST.get('query') # Se obtiene el valor ingresado por el usuario.
+    if not query: # Si no se ingresa ningun dato, se redirige al home.
+        return redirect('home')
+    images = services.filterByCharacter(query) # Filtra las cards que coincidan con el texto ingresado.
+    favourite_list = []
+    return render(request, 'home.html', { 'images': images, 'favourite_list': favourite_list }) # Se renderiza el template 'home.html' pasando el listado de imágenes.
     """
     Busca personajes por nombre.
     Se debe implementar la búsqueda de personajes según el nombre ingresado.
     Se debe obtener el parámetro 'query' desde el POST, filtrar las imágenes según el nombre
     y renderizar 'home.html' con los resultados. Si no se ingresa nada, redirigir a 'home'.
     """
-    pass
+    
 
 def filter_by_status(request):
     """
@@ -145,4 +151,6 @@ def register(request):
         
         return redirect('home') # Se redirige al usuario a la página principal después de registrarse.
     
+
     return render(request,'register.html') # Se renderiza el template 'register.html' pasando el formulario en el contexto.
+
