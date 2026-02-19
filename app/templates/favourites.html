@@ -1,4 +1,7 @@
 {% extends 'header.html' %} {% block content %}
+{% block body_class %}{% endblock %}
+
+
 <div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
@@ -19,7 +22,25 @@
                     </div>
                 {% endfor %}
             {% endif %}
-            <table class="table table-striped table-hover table-bordered">
+
+            {% load static %}
+
+            {% if favourite_list|length == 0 %}
+                <div class="text-center py-5">
+                    <img src="{% static 'imagenes/apu-limpieza.png' %}" 
+                        alt="Apu barriendo"
+                        style="max-width:320px; width:100%; height:auto;">
+
+                    <h4 class="mt-4">No tenés personajes favoritos todavía</h4>
+                    <p>¡Agregá algunos desde la guía!</p>
+
+                    <a href="{% url 'home' %}" class="btn btn-warning">
+                        Ir a la galeria de personajes
+                    </a>
+                </div>
+
+            {% else %}
+            <table class="table table-striped table-hover align-middle w-100">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -35,7 +56,7 @@
                     {% for favourite in favourite_list %}
                     <tr>
                         <td>-</td>
-                        <td><img src="{{ favourite.image }}" alt="" style="max-width: 50px; max-height: 50px;"></td>
+                        <td><img src="{{ favourite.image }}" alt="" style="max-width: 120px; max-height: 120px;"></td>
                         <td>{{ favourite.name }}</td>
                         <td>{{ favourite.gender }}</td>
                         <td>{{ favourite.status }}</td>
@@ -51,6 +72,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+            {% endif %}
         </div>
     </div>
 </div>
